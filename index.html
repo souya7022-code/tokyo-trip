@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>修学旅行｜東京1DAY PLAN</title>
+  <style>
+    :root{
+      --bg:#0b1020; --panel:#131a2b; --panel2:#182238; --text:#f7f8fc;
+      --muted:#a9b3c9; --harajuku:#ff7aa8; --omotesando:#65d6c8;
+      --shibuya:#7ca7ff; --night:#a98cff; --ikebukuro:#ffb45f;
+      --gold:#ffd76a; --ok:#61d095;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans",
+      "Yu Gothic UI","Noto Sans JP",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(124,167,255,.12), transparent 28%),
+        radial-gradient(circle at 100% 20%, rgba(255,122,168,.10), transparent 24%),
+        var(--bg);
+    }
+    .wrap{width:min(980px,calc(100% - 20px));margin:auto;padding:18px 0 60px}
+    .hero{
+      background:linear-gradient(145deg,#182039,#101729 60%,#0e1424);
+      border:1px solid rgba(255,255,255,.08); border-radius:26px;
+      padding:24px; box-shadow:0 18px 50px rgba(0,0,0,.25)
+    }
+    .eyebrow{
+      display:inline-block; font-size:11px; font-weight:900; letter-spacing:.12em;
+      padding:7px 10px; border-radius:999px; background:rgba(255,255,255,.07);
+      color:#dbe4f6
+    }
+    h1{font-size:clamp(28px,6vw,48px);margin:14px 0 8px;line-height:1.08}
+    .hero p{margin:0;color:var(--muted);line-height:1.7}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+    .chip{font-size:12px;font-weight:800;padding:8px 10px;border-radius:999px;
+      background:#10182a;border:1px solid rgba(255,255,255,.08)}
+    .sharebar{
+      display:flex;gap:10px;flex-wrap:wrap;margin-top:16px
+    }
+    .btn{
+      border:0;border-radius:13px;padding:11px 14px;font-weight:900;cursor:pointer;
+      text-decoration:none;display:inline-flex;align-items:center;justify-content:center;
+      background:#eaf0ff;color:#10182a
+    }
+    .btn.secondary{background:#24314e;color:#fff}
+    .hint{font-size:11px;color:#7f8ca7;margin-top:9px;line-height:1.5}
+
+    .section-title{
+      display:flex;justify-content:space-between;align-items:end;gap:10px;
+      margin:26px 4px 12px
+    }
+    .section-title h2{margin:0;font-size:20px}
+    .section-title span{font-size:12px;color:var(--muted)}
+
+    .split{
+      background:linear-gradient(135deg,rgba(255,180,95,.14),rgba(124,167,255,.09));
+      border:1px solid rgba(255,180,95,.25);border-radius:20px;padding:16px;
+      margin-top:18px
+    }
+    .split strong{display:block;font-size:16px;margin-bottom:6px}
+    .split p{margin:0;color:#cad3e6;line-height:1.65;font-size:13px}
+
+    .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,.62fr);gap:16px}
+    .lane{
+      background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);
+      border-radius:20px;padding:13px
+    }
+    .lane-title{font-weight:900;font-size:14px;margin-bottom:10px}
+
+    details.card{
+      --accent:#7ca7ff;
+      margin:0 0 12px;
+      background:var(--panel);
+      border:1px solid rgba(255,255,255,.07);
+      border-left:4px solid var(--accent);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 10px 26px rgba(0,0,0,.13)
+    }
+    details.card[open]{background:linear-gradient(180deg,#182238,#111827)}
+    summary{
+      list-style:none;cursor:pointer;padding:16px;display:block;
+      -webkit-tap-highlight-color:transparent
+    }
+    summary::-webkit-details-marker{display:none}
+    .summary-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+    .time{font-weight:900;font-size:13px;color:var(--accent);margin-bottom:5px}
+    .place{font-size:17px;font-weight:900;line-height:1.35}
+    .arrow{
+      flex:0 0 auto;width:30px;height:30px;border-radius:10px;
+      display:grid;place-items:center;background:#202a41;color:#cdd8ed;
+      transition:.2s ease;font-size:20px
+    }
+    details[open] .arrow{transform:rotate(90deg)}
+    .meta{margin-top:8px;color:var(--muted);font-size:13px;line-height:1.6}
+    .tap{margin-top:9px;font-size:11px;font-weight:800;color:#cbd6eb}
+    .body{padding:0 16px 16px;border-top:1px solid rgba(255,255,255,.06)}
+    .body p{color:#c7d0e2;line-height:1.75;font-size:14px;margin:14px 0}
+    .facts{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .fact{background:#0d1422;border-radius:13px;padding:11px;border:1px solid rgba(255,255,255,.06)}
+    .fact small{display:block;color:#78869e;font-size:10px;margin-bottom:4px}
+    .fact strong{font-size:12px;line-height:1.45}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .action{
+      text-decoration:none;padding:10px 12px;border-radius:12px;background:#25314d;
+      color:white;font-weight:850;font-size:12px
+    }
+
+    .start{--accent:var(--gold)}
+    .harajuku{--accent:var(--harajuku)}
+    .omotesando{--accent:var(--omotesando)}
+    .shibuya{--accent:var(--shibuya)}
+    .night{--accent:var(--night)}
+    .ikebukuro{--accent:var(--ikebukuro)}
+    .meet{box-shadow:0 0 0 1px rgba(101,214,200,.15),0 10px 26px rgba(0,0,0,.13)}
+    .feature{background:linear-gradient(135deg,rgba(169,140,255,.16),rgba(124,167,255,.08)),var(--panel2)}
+
+    .badge{
+      display:inline-block;margin-left:6px;font-size:9px;font-weight:900;letter-spacing:.08em;
+      padding:4px 7px;border-radius:999px;background:#d8c9ff;color:#251b3e;vertical-align:middle
+    }
+    .badge.meet{background:#9af1e5;color:#0b342f}
+
+    .note{
+      margin-top:18px;padding:15px 16px;border-radius:18px;background:#10182a;
+      border:1px dashed rgba(255,255,255,.13);color:#c6d0e2;font-size:13px;line-height:1.7
+    }
+    footer{text-align:center;color:#748099;font-size:11px;margin-top:28px}
+
+    @media(max-width:820px){.grid{grid-template-columns:1fr}}
+    @media(max-width:640px){
+      .wrap{width:min(100% - 12px,980px);padding-top:8px}
+      .hero{padding:19px 16px;border-radius:22px}
+      .facts{grid-template-columns:1fr}
+      .sharebar .btn{flex:1 1 auto}
+    }
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <section class="hero">
+    <span class="eyebrow">SCHOOL TRIP · TOKYO</span>
+    <h1>原宿・表参道・渋谷<br>1DAY PLAN</h1>
+    <p>
+      9:00に浅草ビューホテルを出発。メイン組は原宿へ。
+      途中で池袋K-POP組が別行動し、<strong style="color:#fff">12:40ごろ昼食で合流</strong>。
+      最後は夜のSHIBUYA SKYへ。
+    </p>
+    <div class="chips">
+      <span class="chip">👟 スニーカー</span>
+      <span class="chip">🧥 ファッション</span>
+      <span class="chip">🎧 K-POP</span>
+      <span class="chip">🤝 途中合流</span>
+      <span class="chip">🌃 夜景</span>
+    </div>
+
+    <div class="sharebar">
+      <button class="btn" id="shareBtn" type="button">共有する</button>
+      <button class="btn secondary" id="copyBtn" type="button">このページのURLをコピー</button>
+    </div>
+    <div class="hint">
+      ※「共有する」はSafari/Chromeなど通常のブラウザで開いた場合に使えます。
+      ファイルとして友達に送る場合は、このHTMLファイル自体をLINE・AirDrop・メール等で共有してください。
+    </div>
+  </section>
+
+  <section class="split">
+    <strong>🎧 池袋K-POP組：11時台に買い物 → 12:40ごろ合流</strong>
+    <p>
+      らしんばん本店 池袋 K-POP STOREを見てから原宿・明治神宮前方面へ戻る想定です。
+      合流は昼食時間にして、多少の遅れを吸収しやすくしています。
+    </p>
+  </section>
+
+  <div class="section-title">
+    <h2>メイン組</h2>
+    <span>カードをタップで概要</span>
+  </div>
+
+  <div class="grid">
+    <section class="lane">
+      <div class="lane-title">👥 原宿 → 表参道 → 渋谷</div>
+
+      <details class="card start">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">09:00</div><div class="place">浅草ビューホテル 出発</div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">ここからメイン組と池袋組に分岐。</div>
+          <div class="tap">タップして概要を表示</div>
+        </summary>
+        <div class="body">
+          <p>メイン組は原宿へ、池袋組は池袋へ。出発前に「誰が池袋へ行くか」「12:40の合流場所」を決めておくと安心です。</p>
+          <div class="facts">
+            <div class="fact"><small>出発</small><strong>09:00</strong></div>
+            <div class="fact"><small>ポイント</small><strong>合流場所を事前共有</strong></div>
+          </div>
+          <div class="actions">
+            <a class="action" target="_blank" href="https://www.google.com/maps/search/?api=1&query=浅草ビューホテル">マップを開く</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="card harajuku">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">10:15〜11:00</div><div class="place">原宿到着・周辺散策</div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">開店前の調整時間。</div>
+          <div class="tap">タップして概要を表示</div>
+        </summary>
+        <div class="body">
+          <p>明治神宮、竹下通り、キャットストリート入口などを軽く散策。電車の遅れがあってもこの時間で吸収できます。</p>
+          <div class="facts">
+            <div class="fact"><small>滞在目安</small><strong>30〜45分</strong></div>
+            <div class="fact"><small>目的</small><strong>開店待ち＋時間調整</strong></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="card harajuku">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">11:00〜11:30</div><div class="place">CONVERSE STORE HARAJUKU</div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">厚底コンバース候補をチェック。</div>
+          <div class="tap">タップして概要を表示</div>
+        </summary>
+        <div class="body">
+          <p>厚底コンバースを探す候補。ここで実物を見て、あとでスニダンと比較すると選びやすいです。</p>
+          <div class="actions">
+            <a class="action" target="_blank" href="https://www.google.com/maps/search/?api=1&query=CONVERSE+STORE+HARAJUKU">マップを開く</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="card harajuku">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">11:30〜12:00</div><div class="place">SNKRDUNK 原宿</div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">厚底モデルや人気スニーカーを比較。</div>
+          <div class="tap">タップして概要を表示</div>
+        </summary>
+        <div class="body">
+          <p>人気モデルや二次流通のスニーカーを見る場所。欲しいモデルがあればこの時間を少し長めにしてOKです。</p>
+          <div class="actions">
+            <a class="action" target="_blank" href="https://www.google.com/maps/search/?api=1&query=SNKRDUNK+HARAJUKU">マップを開く</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="card harajuku">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">12:00〜12:35</div><div class="place">BAPE STORE 原宿</div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">ストリート系を見るメインスポット。</div>
+          <div class="tap">タップして概要を表示</div>
+        </summary>
+        <div class="body">
+          <p>原宿らしいストリート系の店。混雑していたら少し短縮して、昼食の時間を守るのがおすすめです。</p>
+          <div class="actions">
+            <a class="action" target="_blank" href="https://www.google.com/maps/search/?api=1&query=BAPE+STORE+原宿">マップを開く</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="card omotesando meet">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">12:40〜13:20</div><div class="place">昼ごはん・池袋組と合流 <span class="badge meet">MEET</span></div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">今回の重要な合流ポイント。</div>
+          <div class="tap">タップして合流情報を表示</div>
+        </summary>
+        <div class="body">
+          <p>池袋組が少し遅れても、食事時間の中で吸収しやすい構成です。待ち合わせ場所は「店名」か「駅出口」まで決めておくと迷いにくいです。</p>
+          <div class="facts">
+            <div class="fact"><small>集合目安</small><strong>12:40ごろ</strong></div>
+            <div class="fact"><small>エリア</small><strong>原宿〜表参道</strong></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="card omotesando">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">13:20〜14:00</div><div class="place">ann fragrance 表参道</div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">ここから全員で行動。</div>
+          <div class="tap">タップして概要を表示</div>
+        </summary>
+        <div class="body">
+          <p>香りを試しながら見たいスポット。昼食後なので落ち着いて回れます。</p>
+          <div class="actions">
+            <a class="action" target="_blank" href="https://www.google.com/maps/search/?api=1&query=ann+fragrance+表参道">マップを開く</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="card omotesando">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">14:00〜15:00</div><div class="place">Levi's → ARC'TERYX</div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">神宮前エリアをまとめて回る。</div>
+          <div class="tap">タップして概要を表示</div>
+        </summary>
+        <div class="body">
+          <p>移動方向を渋谷側へ揃えることで戻りを減らす区間です。買い物が長引いたらどちらかを短めに。</p>
+        </div>
+      </details>
+
+      <details class="card shibuya">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">15:00〜16:30</div><div class="place">キャットストリート → 渋谷</div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">KITH / Stüssy / Supreme は1〜2店舗。</div>
+          <div class="tap">タップして概要を表示</div>
+        </summary>
+        <div class="body">
+          <p>歩きながら渋谷方面へ。寄り道しすぎるとSHIBUYA SKYが慌ただしくなるので、追加店舗は1〜2つがちょうどいいです。</p>
+        </div>
+      </details>
+
+      <details class="card shibuya">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">16:30〜17:20</div><div class="place">NIKE SHIBUYA</div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">渋谷側の買い物を一区切り。</div>
+          <div class="tap">タップして概要を表示</div>
+        </summary>
+        <div class="body">
+          <p>ここを出たら夕食やスクランブル交差点周辺へ。SHIBUYA SKYの予約時刻を見ながら調整します。</p>
+          <div class="actions">
+            <a class="action" target="_blank" href="https://www.google.com/maps/search/?api=1&query=NIKE+SHIBUYA">マップを開く</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="card night feature">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">18:30〜19:30ごろ</div><div class="place">SHIBUYA SKY <span class="badge">MAIN EVENT</span></div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">夜景で締める。予約時間が最優先。</div>
+          <div class="tap">タップして概要を表示</div>
+        </summary>
+        <div class="body">
+          <p>この日のメイン。夕方以降に設定して夜景を狙います。日時指定チケットなら、その入場時刻を基準に前の予定を調整してください。</p>
+          <div class="actions">
+            <a class="action" target="_blank" href="https://www.google.com/maps/search/?api=1&query=SHIBUYA+SKY">マップを開く</a>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <aside class="lane">
+      <div class="lane-title">🎧 池袋K-POP組</div>
+
+      <details class="card ikebukuro">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">09:00〜10:30ごろ</div><div class="place">浅草 → 池袋</div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">池袋駅東口・サンシャイン通り方面へ。</div>
+          <div class="tap">タップして概要を表示</div>
+        </summary>
+        <div class="body">
+          <p>早く着いたら周辺で時間調整。11時の開店に合わせる想定です。</p>
+        </div>
+      </details>
+
+      <details class="card ikebukuro">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">11:00〜11:50</div><div class="place">らしんばん本店 池袋 K-POP STORE</div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">K-POPグッズ専門店。</div>
+          <div class="tap">タップして店舗情報を表示</div>
+        </summary>
+        <div class="body">
+          <p>カード、缶バッジ、ライブ応援グッズ、アクスタ、ぬいぐるみなどを扱うK-POP専門店。池袋駅32番出口から徒歩約4分。</p>
+          <div class="facts">
+            <div class="fact"><small>住所</small><strong>東京都豊島区東池袋1-21-11 オーク池袋ビルディング1F</strong></div>
+            <div class="fact"><small>営業時間</small><strong>平日11:00〜21:00 / 土日祝10:00〜21:00</strong></div>
+            <div class="fact"><small>滞在目安</small><strong>40〜50分</strong></div>
+            <div class="fact"><small>出発目安</small><strong>11:50ごろ</strong></div>
+          </div>
+          <div class="actions">
+            <a class="action" target="_blank" href="https://www.google.com/maps/search/?api=1&query=らしんばん本店+池袋+K-POP+STORE">マップを開く</a>
+            <a class="action" target="_blank" href="https://www.lashinbang.com/store/170">公式サイト</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="card ikebukuro">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">11:50〜12:35</div><div class="place">池袋 → 原宿・明治神宮前</div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">移動＋徒歩＋待ち時間を含めて余裕あり。</div>
+          <div class="tap">タップして合流ルートを表示</div>
+        </summary>
+        <div class="body">
+          <p>池袋駅へ戻り、原宿・明治神宮前方面へ。駅構内の移動や乗り換え待ちを含めて約45分の枠にしています。</p>
+          <div class="actions">
+            <a class="action" target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=池袋駅&destination=明治神宮前駅&travelmode=transit">経路を開く</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="card omotesando meet">
+        <summary>
+          <div class="summary-top">
+            <div><div class="time">12:40ごろ</div><div class="place">メイン組と合流 🤝</div></div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="meta">昼食場所で合流。</div>
+          <div class="tap">タップして概要を表示</div>
+        </summary>
+        <div class="body">
+          <p>以降は全員で表参道 → 渋谷へ。遅れた場合は、合流場所を昼食店に固定しておくとズレにくいです。</p>
+        </div>
+      </details>
+    </aside>
+  </div>
+
+  <div class="note">
+    <strong>この版の変更点：</strong>
+    概要表示はHTML標準の「details / summary」を使っているため、JavaScriptが制限される環境でもタップで開きやすくなっています。
+    共有時はこのHTMLファイルをそのまま送れば、相手も同じ内容を開けます。
+  </div>
+
+  <footer>Tokyo School Trip Planner · Shareable Version</footer>
+</main>
+
+<script>
+  const shareBtn = document.getElementById('shareBtn');
+  const copyBtn = document.getElementById('copyBtn');
+
+  shareBtn.addEventListener('click', async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: document.title,
+          text: '修学旅行の旅程',
+          url: location.href
+        });
+      } else {
+        await navigator.clipboard.writeText(location.href);
+        alert('共有機能が使えないため、URLをコピーしました。');
+      }
+    } catch(e) {}
+  });
+
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(location.href);
+      copyBtn.textContent = 'コピーしました';
+      setTimeout(() => copyBtn.textContent = 'このページのURLをコピー', 1600);
+    } catch(e) {
+      alert('この開き方ではURLコピーが使えません。HTMLファイル自体を共有してください。');
+    }
+  });
+</script>
+</body>
+</html>
